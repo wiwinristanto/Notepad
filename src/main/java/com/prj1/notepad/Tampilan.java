@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -124,17 +125,19 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser =  new JFileChooser();
+        int option = fileChooser .showSaveDialog();
         
-        try{
-            
-            PrintWriter printWriter = new PrintWriter(new FileWriter("test.txt"));
-            printWriter.write(txtInput.getText());
-            printWriter.flush();
-            printWriter.close();
-        } catch (IOException e){
-            System.err.println("Error Occured");
-            e.printStackTrace();
-        }
+//        try{
+//            
+//            PrintWriter printWriter = new PrintWriter(new FileWriter("test.txt"));
+//            printWriter.write(txtInput.getText());
+//            printWriter.flush();
+//            printWriter.close();
+//        } catch (IOException e){
+//            System.err.println("Error Occured");
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void txtInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMouseClicked

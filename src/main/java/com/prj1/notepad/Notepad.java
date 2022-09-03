@@ -19,11 +19,13 @@ public class Notepad{
 
     public static void main(String[] args) {
         
-        
-       
         Tampilan tp = new Tampilan();
         tp.setVisible(true);
         
     }
     
 }
+
+//Note
+//https://stackoverflow.com/questions/46438359/saving-jtextarea-to-a-txt-file-with-a-button
+//https://www.tutorialspoint.com/swingexamples/show_save_file_dialog.htm

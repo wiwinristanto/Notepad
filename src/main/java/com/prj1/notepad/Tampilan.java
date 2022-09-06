@@ -6,6 +6,7 @@ package com.prj1.notepad;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,9 +22,9 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
         initComponents();
         txtInput.addKeyListener(this);
 //        keyPressed();
-     
+
     }
-    
+
 //    private void keyPressed(KeyEvent n){
 //         txtInput.getText();
 //         
@@ -41,7 +42,6 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
 //         }
 //       
 //     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,19 +125,31 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        JFileChooser fileChooser =  new JFileChooser();
-        int option = fileChooser .showSaveDialog();
-        
-//        try{
-//            
-//            PrintWriter printWriter = new PrintWriter(new FileWriter("test.txt"));
-//            printWriter.write(txtInput.getText());
-//            printWriter.flush();
-//            printWriter.close();
-//        } catch (IOException e){
-//            System.err.println("Error Occured");
-//            e.printStackTrace();
-//        }
+        JFileChooser fileChooser = new JFileChooser("../..");
+//        fileChooser.setCurrentDirectory(dir);
+        int option = fileChooser.showSaveDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            
+            try {
+                String namingfile = null;
+                String extentioString = null;
+                String directory = fileChooser.getSelectedFile().getParent();
+                File tempFile = File.createTempFile(namingfile,extentioString,new File(directory)
+                );
+                txtInput.setText(txtInput.getText()+fileChooser.getSelectedFile().getName());
+                
+                PrintWriter printWriter = new PrintWriter(tempFile);
+                printWriter.write(txtInput.getText());
+                printWriter.flush();
+                printWriter.close();
+            } catch (IOException e) {
+                System.err.println("Error Occured");
+                e.printStackTrace();
+            }
+
+        }
+
+//        
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void txtInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInputMouseClicked
@@ -171,22 +183,22 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent p) {
-          if(p.getKeyCode() == KeyEvent.VK_ENTER){
-          try{
-            PrintWriter printWriter = new PrintWriter(new FileWriter("test.txt"));
-            printWriter.write(txtInput.getText());
-            printWriter.flush();
-            printWriter.close();
-            } catch (IOException e){
+        if (p.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                PrintWriter printWriter = new PrintWriter(new FileWriter("test.txt"));
+                printWriter.write(txtInput.getText());
+                printWriter.flush();
+                printWriter.close();
+            } catch (IOException e) {
                 System.err.println("Error Occured");
                 e.printStackTrace();
-        } 
-      }
+            }
+        }
     }
 
 }

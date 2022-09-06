@@ -129,6 +129,13 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
 //        fileChooser.setCurrentDirectory(dir);
         int option = fileChooser.showSaveDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if(file==null){
+                return;
+            }
+            if(!file.getName().toLowerCase().endsWith(".txt")){
+                file = new File(file.getParentFile().getParentFile().getName()+".txt#");
+            }
             
             try {
                 String namingfile = null;
@@ -136,9 +143,10 @@ public class Tampilan extends javax.swing.JFrame implements KeyListener {
                 String directory = fileChooser.getSelectedFile().getParent();
                 File tempFile = File.createTempFile(namingfile,extentioString,new File(directory)
                 );
+
                 txtInput.setText(txtInput.getText()+fileChooser.getSelectedFile().getName());
                 
-                PrintWriter printWriter = new PrintWriter(tempFile);
+                PrintWriter printWriter = new PrintWriter(new FileWriter(fileChooser.getName()));
                 printWriter.write(txtInput.getText());
                 printWriter.flush();
                 printWriter.close();
